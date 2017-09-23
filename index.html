@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CL-CRM</title>
+  <link type="text/css" rel="stylesheet" charset="utf-8" href="style.css">
+</head>
+<body>
+  <section><h1>CL-CRM</h1></section>
+  <div id="top-of-page">
+    <h2>CL-CRM is a simple testbed CRM built in Common Lisp</h1>
+    <p>The goal is to present a list of recent contacts, recent interactions,
+    and suggestions.</p>
+  </div>
+  <div id="recent-contacts">
+    <h1>Recently Seen Contacts</h1>
+    <ul id="recent-contact-list">
+	    <li><a href="contact?id=1">Chase Chambliss</a>
+			    <a href="one_click_lunch?contact_id=1">Lunch</a>
+			    <a href="one_click_drinks?contact_id=1">Drinks</a>
+			    <a href="one_click_drinks?contact_id=1">Other</a></li>
+	    <li><a href="contact?id=2">John Marsh</a>
+			    <a href="one_click_lunch?contact_id=2">Lunch</a>
+			    <a href="one_click_drinks?contact_id=2">Drinks</a>
+			    <a href="one_click_drinks?contact_id=2">Other</a></li>
+	    <li><a href="contact?id=3">Britt Barley</a>
+			    <a href="one_click_lunch?contact_id=3">Lunch</a>
+			    <a href="one_click_drinks?contact_id=3">Drinks</a>
+			    <a href="one_click_drinks?contact_id=3">Other</a></li>
+	    <li><a href="contact?id=4">Bob Van Alst</a>
+			    <a href="one_click_lunch?contact_id=4">Lunch</a>
+			    <a href="one_click_drinks?contact_id=4">Drinks</a>
+			    <a href="one_click_drinks?contact_id=4">Other</a></li>
+	    <li><a href="contact?id=5">Johnny Holleman</a>
+			    <a href="one_click_lunch?contact_id=5">Lunch</a>
+			    <a href="one_click_drinks?contact_id=5">Drinks</a>
+			    <a href="one_click_drinks?contact_id=5">Other</a></li>
+	    <li><a href="contact?id=6">Loren Martorana</a>
+			    <a href="one_click_lunch?contact_id=6">Lunch</a>
+			    <a href="one_click_drinks?contact_id=6">Drinks</a>
+			    <a href="one_click_drinks?contact_id=6">Other</a></li>
+    </ul>
+  </div>
+  <div id="recent-interactions">
+    <h1>Recent Interactions</h1>
+    <ul id="recent-interaction-list">
+	    <li>Lunch with Chase and John</li>
+	    <li>Office visit with Britt</li>
+	    <li>Closing with Johnny, Bob, and Loren</li>
+    </ul>
+  </div>
+  <div id="suggested-interactions">
+    <h1>Suggested Interactions</h1>
+    <ul id="suggested-interaction-list">
+	    <li>Lunch with Britt Barley</li>
+	    <li>Lunch with Andrew Harp</li>
+	    <li>Drinks with Richard Bradford</li>
+	    <li>Lunch with Christian Ware</li>
+    </ul>
+  </div>
+  <div id="add-data-links">
+    <h1>Add</h1>
+    <a href="add_client">Add Client</a><br>
+    <a href="add_contact">Add Contact</a><br>
+    <a href="add_interaction">Add Interaction</a><br>
+  </div>
+  <!--<script type="text/javascript" charset="UTF-8" src="main.js"></script>-->
+</body>
+</html>
