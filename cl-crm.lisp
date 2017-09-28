@@ -3,12 +3,8 @@
 ;; NOTE: use c-w _ to maximize a vim window
 ;;       use c-b m-left/right/up/down to resize tmux pane
 
-(in-package :cl-user)
 
-(defpackage :cl-crm
-  (:use :common-lisp :cl-who :hunchentoot))
-
-(in-package :cl-crm)
+(in-package #:cl-crm)
 
 (format t "Starting up cl-crm...~%")
 (format t "Loading contacts.lisp...~%")
