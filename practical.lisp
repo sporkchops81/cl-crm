@@ -47,3 +47,69 @@
 
 (defun select (selector-fn)
   (remove-if-not selector-fn *db*))
+
+(defun where (&key title artist rating (ripped nil ripped-p))
+  #'(lambda (cd)
+      (and
+	(if title	(equal (getf cd :title) title) t)
+	(if artist	(equal (getf cd :artist) artist) t)
+	(if rating	(equal (getf cd :rating) rating) t)
+	(if ripped-p	(equal (getf cd :ripped) ripped) t))))
+
+(defun update (selector-fn &key title artist rating (ripped nil ripped-p))
+  (setf *db*
+	(mapcar
+	  #'(lambda (row)
+	      (when (funcall selector-fn row)
+		(if title	(setf (getf row :title) title))
+		(if artist	(setf (getf row :artist) artist))
+		(if rating	(setf (getf row :rating) rating))
+		(if ripped-p	(setf (getf row :ripped) ripped)))
+	      row) *db*)))
+
+(defun delete-rows (selector-fn)
+  (setf *db* (remove-if selector-fn *db*)))
+
+(defun make-comparison-expr (field value)
+  `(equal (getf cd ,field) ,value))
+
+(defun new-account (name &optional (balance 0.00)
+			 (interest-rate .06))
+  "Create a new account that knows the following messages:"
+  (let ((name name) (balance balance) (interest-rate interest-rate))
+  #'(lambda (message)
+      (case message
+	(withdraw #'(lambda (amt)
+		      (if (<= amt balance)
+			(decf balance amt)
+			'insufficient-funds)))
+	(deposit #'(lambda (amt) (incf balance amt)))
+	(balance #'(lambda () balance))
+	(name    #'(lambda () name))
+	(interest #'(lambda ()
+		      (incf balance
+			    (* interest-rate balance))))))))
+
+(defun get-method (object message)
+  "Return the method that implements the message for this object"
+  (funcall object message))
+
+(defun send (object message &rest args)
+  "Get the function to implement the message and apply the function to the args"
+  (apply (get-method object message) args))
+
+(defmacro define-class (class inst-vars class-vars &body methods)
+  "Define a class for OOP"
+  ;; Define constructor and generic functions for methods
+  `(let ,class-vars
+     (mapcar #'ensure-generic-fn ',(mapcar #'first methods))
+     (defun ,class ,inst-vars
+       #'(lambda (message)
+	   (case message
+	     ,@(mapcar #'make-clause methods))))))
+
+(defun make-clause (clause)
+  "Translate a message from define-class into a case clause."
+  `(,(first clause) #'(lambda ,(second clause) .,(rest clause))))
+
+
